@@ -1,0 +1,12 @@
+<h1>WELLCOME</h1>
+<%= @mailo %>
+
+<% @managoo['data'].each do |ep| %>
+<div class="person">
+  <span><%= ep['opportunity']['id'] %></span>
+  <span><%= ep['opportunity']['title'] %></span>
+  <span><%= ep['status'] %></span>
+
+</div>
+
+<% end %>

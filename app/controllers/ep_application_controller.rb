@@ -1,0 +1,3 @@
+class EpApplicationController < ApplicationController
+  
+end

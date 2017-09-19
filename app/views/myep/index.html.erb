@@ -1,0 +1,14 @@
+<h1>YOUR EPS</h1>
+<%= @mailo %>
+
+<% @manago['data'].each do |ep| %>
+<div class="person">
+  <span><%= ep['full_name'] %></span>
+  <span><%= ep['phone'] %></span>
+  <span><%= ep['status'] %></span>
+  <%if ep['status'] != 'open'%>
+  <span><%= link_to 'applications', controller:'myep' ,action:'new',ep_id: ep['id']  %></span>
+  <%end%>
+</div>
+
+<% end %>

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Faction name:</strong>
+  <%= @faction.faction_name %>
+</p>
+
+<p>
+  <strong>Member:</strong>
+  <%= @faction.member %>
+</p>
+
+<%= link_to 'Edit', edit_faction_path(@faction) %> |
+<%= link_to 'Back', factions_path %>
