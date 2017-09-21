@@ -1,7 +1,10 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Members</h1>
-
+<% if session[:token].nil? %>
+<%= "hambo2a"%>
+<%end%>
+<%= session[:token] %>
 <table>
   <thead>
     <tr>
@@ -27,5 +30,7 @@
 </table>
 
 <br>
+<%= link_to 'sign out' , destroy_user_session_path,method: :delete %>
 <%= link_to 'get managers', new_ogv_path %>
 <%= link_to '  my eps' , myep_index_path %>
+<%= link_to ' All eps' , ep_display_path %>
