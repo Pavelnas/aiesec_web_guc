@@ -5,10 +5,6 @@ class MembersController < ApplicationController
   # GET /members.json
   def index
     @members = Member.all
-    'if @member_loged.nil?
-      redirect_to controls_login_path
-    end'
-
   end
 
   # GET /members/1

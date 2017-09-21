@@ -2,13 +2,19 @@ class OgvsController < ApplicationController
   def new
     @iid = Ogv.new
   end
+  def index
+    project_id = params['project_id']
+    params = {access_token: 'e316ebe109dd84ed16734e5161a2d236d0a7e6daf499941f7c110078e3c75493'}
+    @response = HTTParty.get("https://gis-api.aiesec.org/v2/opportunities/#{project_id}" , query:params )
+    @managers = @response.parsed_response
+    render 'create'
+  end
   def create
   @project  = Ogv.new(id_param)
   @x = @project.project_id
   params = {access_token: 'e316ebe109dd84ed16734e5161a2d236d0a7e6daf499941f7c110078e3c75493'}
   @response = HTTParty.get("https://gis-api.aiesec.org/v2/opportunities/#{@x}" , query:params )
   @managers = @response.parsed_response
-
   render 'create'
   end
   private

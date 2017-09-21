@@ -10,7 +10,7 @@
 
     @manager_idhat = @managerss[0]['id']
 
-    paramss = {access_token: 'e316ebe109dd84ed16734e5161a2d236d0a7e6daf499941f7c110078e3c75493',per_page: 100 ,filters:{contacted_by: @manager_idhat}}
+    paramss = {access_token: 'e316ebe109dd84ed16734e5161a2d236d0a7e6daf499941f7c110078e3c75493',per_page: 50 ,filters:{contacted_by: @manager_idhat}}
     @responsesat = HTTParty.get("https://gis-api.aiesec.org/v2/people" , query:paramss )
     @manago = @responsesat.parsed_response
     render 'index'

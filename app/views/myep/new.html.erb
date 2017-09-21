@@ -6,7 +6,7 @@
   <span><%= ep['opportunity']['id'] %></span>
   <span><%= ep['opportunity']['title'] %></span>
   <span><%= ep['status'] %></span>
-
+  <span><%= link_to 'project managers', controller:'ogvs' ,action:'index',project_id: ep['opportunity']['id']  %></span>
 </div>
 
 <% end %>
