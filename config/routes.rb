@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  devise_scope :user do
+    post '/users/sign_in', to: 'password#create'
+  end
   devise_for :users
   get 'controls/login'
   root "members#index"

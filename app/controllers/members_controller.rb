@@ -11,7 +11,7 @@ class MembersController < ApplicationController
     @max_age = nil
     @expiration_time = nil
     @password = nil
-    self.auth(current_user.email ,"puma2007")
+    self.auth(current_user.email ,session[:password])
 
   end
 
