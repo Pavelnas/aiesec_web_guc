@@ -10,7 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170921161904) do
+ActiveRecord::Schema.define(version: 20170923210504) do
+
+  create_table "Eps_Users", id: false, force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "ep_id",   null: false
+    t.index ["ep_id", "user_id"], name: "index_Eps_Users_on_ep_id_and_user_id"
+    t.index ["user_id", "ep_id"], name: "index_Eps_Users_on_user_id_and_ep_id"
+  end
+
+  create_table "eps", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.integer  "expa_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "expas", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -52,6 +67,7 @@ ActiveRecord::Schema.define(version: 20170921161904) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "role"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.index ["email"], name: "index_users_on_email", unique: true

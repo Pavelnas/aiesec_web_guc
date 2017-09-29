@@ -1,10 +1,7 @@
-class MembersController < ApplicationController
-  before_action :set_member, only: [:show, :edit, :update, :destroy]
+class UserController < ApplicationController
 
-  # GET /members
-  # GET /members.json
   def index
-    @members = Member.all
+    @member = User.all
     @url = 'https://auth.aiesec.org/users/sign_in'
     @url_op = 'https://aiesec.org/auth'
     @token = nil
@@ -18,14 +15,11 @@ class MembersController < ApplicationController
   def auth(email, password)
     @email = email
     @password = password
-    @myep_url = 'https://gis-api.aiesec.org/v2/people/my'
     agent = Mechanize.new {|a| a.ssl_version, a.verify_mode = 'TLSv1',OpenSSL::SSL::VERIFY_NONE}
     page = agent.get(@url)
     aiesec_form = page.form()
     aiesec_form.field_with(:name => 'user[email]').value = @email
     aiesec_form.field_with(:name => 'user[password]').value = @password
-    agents = Mechanize.new {|a| a.ssl_version, a.verify_mode = 'TLSv1',OpenSSL::SSL::VERIFY_NONE}
-    pages = agents.get(@myep_url)
 
     begin
       page = agent.submit(aiesec_form, aiesec_form.buttons.first)
@@ -33,8 +27,8 @@ class MembersController < ApplicationController
       puts exception.to_s
       false
     else
-      if pages.code.to_i == 200
-        cj = pages.mech.agent.cookie_jar.store
+      if page.code.to_i == 200
+        cj = page.mech.agent.cookie_jar.store
         index = cj.count
         for i in 0...index
           index = i if cj.to_a[i].domain == 'aiesec.org'
@@ -60,7 +54,7 @@ class MembersController < ApplicationController
 
   # GET /members/new
   def new
-    @member = Member.new
+    @member = User.new
   end
 
   # GET /members/1/edit
@@ -70,7 +64,7 @@ class MembersController < ApplicationController
   # POST /members
   # POST /members.json
   def create
-    @member = Member.new(member_params)
+    @member = User.new(member_params)
 
     respond_to do |format|
       if @member.save
@@ -107,10 +101,13 @@ class MembersController < ApplicationController
     end
   end
 
+  def display_user
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_member
-      @member = Member.find(params[:id])
+      @member = User.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

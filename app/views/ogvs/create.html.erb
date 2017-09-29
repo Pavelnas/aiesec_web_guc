@@ -3,8 +3,11 @@
 <% @managers['managers'].each do |ep| %>
 <div class="person">
   <span><%= ep['full_name'] %></span>
-  <%if !ep['contact_info'].nil? %>
+  <%if !ep['contact_info'].nil? || !ep['contact_info']['country_code'].nil? %>
+  <span><%= ep['contact_info']['country_code'] %></span>
   <span><%= ep['contact_info']['phone'] %></span>
+  <span><%= ep['contact_info']['email'] %></span>
+
  <%end%>
 </div>
 <% end %>

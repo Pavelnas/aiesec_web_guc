@@ -16,14 +16,13 @@
   </thead>
 
   <tbody>
-    <% @members.each do |member| %>
+    <% @member.each do |member| %>
       <tr>
-        <td><%= member.name %></td>
+
         <td><%= member.email %></td>
-        <td><%= member.password %></td>
-        <td><%= link_to 'Show', member %></td>
-        <td><%= link_to 'Edit', edit_member_path(member) %></td>
-        <td><%= link_to 'Destroy', member, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= member.role  %></td>
+
+
       </tr>
     <% end %>
   </tbody>
@@ -32,5 +31,6 @@
 <br>
 <%= link_to 'sign out' , destroy_user_session_path,method: :delete %>
 <%= link_to 'get managers', new_ogv_path %>
-<%= link_to '  my eps' , myep_index_path %>
+<%= link_to '  my eps' , dash_board_index_path %>
 <%= link_to ' All eps' , ep_display_path %>
+<%= link_to ' members' , user_index_path %>

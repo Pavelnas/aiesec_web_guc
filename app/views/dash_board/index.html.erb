@@ -1,0 +1,26 @@
+<h1>YOUR EPS</h1>
+<%= @mailo %>
+<%= link_to 'open source' , openSource_display_path %>
+<%= link_to 'assign ep', controller:'dash_board' ,action:'show',ep_id: @manago['data'][0]['id'] %>
+<%= link_to 'countries' , countries_path %>
+<% count_eps = 0.0 %>
+<% count_applied = 0.0%>
+<% @manago['data'].each do |ep| %>
+<% count_eps = count_eps + 1%>
+<div class="person">
+  <span><%= ep['full_name'] %></span>
+  <span><%= ep['phone'] %></span>
+  <span><%= ep['status'] %></span>
+  <%if ep['status'] != 'open'%>
+  <span><%= link_to 'applications', controller:'dash_board' ,action:'new',ep_id: ep['id']  %></span>
+  <% count_applied = count_applied +1 %>
+  <%end%>
+  <% if ep['managers'] != [] %>
+  <span><%=link_to ep['managers'][0]['full_name'] , controller:'user', action: 'display_user', manager_id: ep['managers'][0]['id']%></span>
+  <%end%>
+</div>
+<% end %>
+
+<% x = count_applied/count_eps%>
+<%= "convertion rate" %>
+<%= x * 100 %>
