@@ -1,0 +1,13 @@
+<h1>Opp Booklet</h1>
+
+
+<% @managooo['data'].each do |ep| %>
+<% if ep['office']['country'] != 'Egypt'%>
+  <div class="person">
+    <span><%= ep['id'] %></span>
+    <span><%= ep['title'] %></span>
+    <span><%= ep['office']['country'] %></span>
+    <span><%= link_to 'project managers', controller:'ogvs' ,action:'index',project_id: ep['id']  %></span>
+  </div>
+<%end%>
+<% end %>

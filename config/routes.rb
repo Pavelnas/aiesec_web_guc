@@ -18,7 +18,9 @@ Rails.application.routes.draw do
   get '/eps/display', to:'dash_board#display', as:'ep_display'
   get '/eps/display/openSource', to: 'dash_board#openSource', as:'openSource_display'
   get '/eps/countries' , to: 'dash_board#countries' , as:'countries'
-
+  get '/eps/LCs' , to: 'dash_board#LC' , as:'lc'
+  get '/opp', to:'dash_board#opp',as:'opp'
+  get '/opp/filter' , to:'dashboard#opp_filter' , as:'opp_filter'
   match ':controller(/:action(/:id))' , :via => [:get , :post]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

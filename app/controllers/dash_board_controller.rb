@@ -31,6 +31,33 @@ class DashBoardController < ApplicationController
     render 'index'
   end
 
+  def LC
+    paramss = {access_token: 'e316ebe109dd84ed16734e5161a2d236d0a7e6daf499941f7c110078e3c75493',per_page: 50 ,filters:{home_committee: 257}}
+    @responsesat = HTTParty.get("https://gis-api.aiesec.org/v2/people" , query:paramss )
+    @manago = @responsesat.parsed_response
+    @countries_array = Array.new
+    @manago['data'].each do |ep|
+      if ep['status'] != 'open'
+        paramsss = {access_token: 'e316ebe109dd84ed16734e5161a2d236d0a7e6daf499941f7c110078e3c75493',filters:{person_id:ep['id']}}
+        @responsesatt = HTTParty.get("https://gis-api.aiesec.org/v2/applications" , query:paramsss )
+        @managoo = @responsesatt.parsed_response
+
+        @managoo['data'].each do |opp|
+          x = opp['opportunity']['office']['name']
+          @countries_array.push x
+        end
+      end
+    end
+    @countries_hash = Hash.new(0)
+
+    @countries_array.each do |v|
+      @countries_hash[v] += 1
+    end
+    render 'countries'
+
+  end
+
+
   def countries
     paramss = {access_token: 'e316ebe109dd84ed16734e5161a2d236d0a7e6daf499941f7c110078e3c75493',per_page: 50 ,filters:{home_committee: 257}}
     @responsesat = HTTParty.get("https://gis-api.aiesec.org/v2/people" , query:paramss )
@@ -74,6 +101,20 @@ class DashBoardController < ApplicationController
     HTTParty.patch("https://gis-api.aiesec.org/v2/people/#{ep_id}.json",query:params)
     new
 
+  end
+  def opp
+
+    paramsss = {access_token: 'e316ebe109dd84ed16734e5161a2d236d0a7e6daf499941f7c110078e3c75493',per_page:50}
+    @responsesat = HTTParty.get("https://gis-api.aiesec.org/v2/opportunities" , query:paramsss )
+    @managooo = @responsesat.parsed_response
+    render 'booklet'
+  end
+  def filter_opp
+
+    paramsss = {access_token: 'e316ebe109dd84ed16734e5161a2d236d0a7e6daf499941f7c110078e3c75493',per_page:50}
+    @responsesat = HTTParty.get("https://gis-api.aiesec.org/v2/opportunities" , query:paramsss )
+    @managooo = @responsesat.parsed_response
+    render 'booklet'
   end
 
 
